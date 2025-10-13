@@ -9,7 +9,7 @@ class ControladorLibros {
 
     function __construct() {
         // Asumiendo que las clases Modelo y Vista existen en sus respectivos archivos
-        $this->modelo = new Modelo();
+        $this->modelo = new LibrosModelo();
         $this->vista = new Vista();
     }
 
