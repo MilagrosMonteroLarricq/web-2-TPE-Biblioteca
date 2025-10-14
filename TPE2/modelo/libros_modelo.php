@@ -7,7 +7,7 @@ class LibrosModelo {
         // Conectamos con la base de datos
         $this->db = new PDO('mysql:host=localhost;dbname=db_biblioteca;charset=utf8', 'root', '');
     }
-
+ 
     // Obtener todos los libros con su categoría
     public function obtenerLibros() {
         $query = $this->db->prepare('

@@ -10,7 +10,7 @@ class ControladorLibros {
     function __construct() {
         // Asumiendo que las clases Modelo y Vista existen en sus respectivos archivos
         $this->modelo = new LibrosModelo();
-        $this->vista = new Vista();
+        $this->vista = new LibrosVista();
     }
 
     // (A) Listado de ítems: Muestra TODOS los libros.
@@ -18,13 +18,13 @@ class ControladorLibros {
     function showLibros() {
         // Pide todos los libros al Modelo.
         // El Modelo debe devolver un array con todos los datos, incluyendo el nombre del autor.
-        $libros = $this->modelo->obtenerTodosLosLibros(); 
+        $libros = $this->modelo->obtenerLibros(); 
         
         if (empty($libros)) {
             $this->vista->mostrarError("No se encontraron libros en la biblioteca.");
         } else {
             // Muestra el listado completo
-            $this->vista->mostrarListadoLibros($libros);
+            $this->vista->mostrarLibros($libros);
         }
     }
 
@@ -40,13 +40,13 @@ class ControladorLibros {
         $id_libro = $_GET['id_libro'];
         
         // 2. Pide el detalle del libro al Modelo (incluyendo el nombre del autor)
-        $libro = $this->modelo->obtenerDetalleLibro($id_libro);
+        $libro = $this->modelo->obtenerLibroPorId($id_libro);
 
         // 3. Muestra el resultado
         if (empty($libro)) {
             $this->vista->mostrarError("No se encontró el libro con ID: " . $id_libro);
         } else {
-            $this->vista->mostrarDetalleItem($libro); // Nuevo método en la Vista
+            $this->vista->mostrarDetalleLibro($libro); // Nuevo método en la Vista
         }
     }
 }
