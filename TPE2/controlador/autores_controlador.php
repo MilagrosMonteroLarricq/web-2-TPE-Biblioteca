@@ -1,9 +1,9 @@
 <?php
-include_once 'modelo.php';
-include_once 'vista.php';
+include_once 'TPE2/modelo/modelo.php';
+include_once 'TPE2/vista/vista.php';
 
 class ControladorAutor{
-
+ 
     private $modelo;
     private $vista;
 

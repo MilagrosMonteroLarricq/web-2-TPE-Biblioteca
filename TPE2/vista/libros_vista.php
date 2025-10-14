@@ -10,7 +10,7 @@
 
     class LibrosVista {
 
-        // 🔹 Muestra el listado de todos los libros
+        // Muestra el listado de todos los libros
         public function mostrarLibros($libros) {
             ?>
             <h1>Listado de Libros</h1>
@@ -43,7 +43,7 @@
             <?php
         }
 
-        // 🔹 Muestra el detalle de un solo libro
+        // Muestra el detalle de un solo libro
         public function mostrarDetalleLibro($libro) {
             ?>
             <h1>Detalle del Libro</h1>

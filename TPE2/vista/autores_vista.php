@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<?php
+    class AutorVista {
+        function mostrarListadoAutores($autores) {
+            ?>
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Listado de Autores</title>
+            </head>
+            <body>
+                <h1>Listado de Autores (Categorías)</h1>
+                <p>
+                    <a href="route.php?action=listarLibros">Ver todos los libros</a>
+                </p>
+                <hr>
+
+                <?php if (empty($autores)): ?>
+                    <p>No hay autores registrados.</p>
+                <?php else: ?>
+                    <ul>
+                        <?php foreach ($autores as $autor): ?>
+                            <li>
+                                <a href="route.php?action=librosPorAutor/<?= $autor->id_autor ?>">
+                                    <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </body>
+            </html>
+            <?php
+        }
+
+        // Método auxiliar para errores que podría usar el ControladorAutor
+        public function mostrarError($mensaje) {
+            ?>
+            <h1>Error de Autor</h1>
+            <p><?= htmlspecialchars($mensaje) ?></p>
+            <a href="route.php?action=listarLibros">Volver al inicio</a>
+            <?php
+        }
+    }
+?>
+</body>
+</html>
