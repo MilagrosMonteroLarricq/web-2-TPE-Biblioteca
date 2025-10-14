@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body> 
     <?php
 
     class LibrosVista {
@@ -59,6 +59,14 @@
             <?php else: ?>
                 <p>No se encontró el libro solicitado.</p>
             <?php endif; ?>
+            <?php
+        }
+
+        public function mostrarError($mensaje){
+            ?>
+            <h1>Error</h1>
+            <p ><?= htmlspecialchars($mensaje) ?></p>
+            <a href="listarLibros">volver al listado</a>
             <?php
         }
     }
