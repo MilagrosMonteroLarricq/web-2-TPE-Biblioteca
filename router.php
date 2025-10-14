@@ -24,7 +24,7 @@ switch ($params[0]) {
         break;
     case 'librosPorAutor':
         $controller = new ControladorAutor();
-        $controller->showLibrosByAutor($params[1]);
+        $controller->showAutores($params[1]);
         break;
     case 'mostrarAutor':
         $controller = new ControladorAutor();
@@ -33,3 +33,4 @@ switch ($params[0]) {
         echo('404 Page not found');
         break;
 }
+?>

@@ -40,3 +40,4 @@ class LibrosModelo {
     Usa id_libro y id_autor como están definidos en tus tablas reales 
 */
 
+
