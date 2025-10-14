@@ -1,5 +1,5 @@
 <?php
-require_once 'modelo.php';
+include_once 'TPE2/modelo/modelo.php';
 
 class AutorModelo extends Model {
     // Obtener todos los autores

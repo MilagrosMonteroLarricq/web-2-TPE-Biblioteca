@@ -1,12 +1,8 @@
 <?php
-// autores_controlador.php
-
-// 1. INCLUSIONES (Asegúrate de que estas rutas sean correctas)
-require_once 'modelo.php';         // Clase base (si la clase Modelo está ahí)
-require_once 'autores_modelo.php'; 
-require_once 'autores_vista.php'; // Vista para lista de autores y errores
-require_once 'libros_vista.php';   // Vista para el listado de libros
-
+      
+include_once 'TPE2/modelo/autores_modelo.php'; 
+include_once 'TPE2/vista/autores_vista.phtml'; 
+  
 class ControladorAutor{
 
     private $modelo;
@@ -54,7 +50,7 @@ class ControladorAutor{
             $this->vistaAutor->mostrarError("No se encontraron libros para el autor con ID: " . $id_autor);
         } else{
             //  USAMOS LA VISTA DE LIBROS para mostrar la tabla de ítems
-            $this->vistaLibros->obtenerTodosLosAutores($libros, $titulo); 
+            $this->vistaLibros->mostrarLibros($libros, $titulo); 
         }
     }
 }

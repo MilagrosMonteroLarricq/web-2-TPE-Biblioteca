@@ -1,6 +1,6 @@
 <?php
-require_once 'autores_controlador.php';
-require_once 'libros_controlador.php';
+include_once 'autores_controlador.php';
+include_once 'libros_controlador.php';
 
 // leemos la accion que viene por parametro
 $action = 'listarLibros'; // acción por defecto

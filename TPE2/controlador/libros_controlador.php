@@ -1,7 +1,7 @@
 <?php
 // Incluimos el modelo y la vista
-include_once 'libros_modelo.php';
-include_once 'libros_vista.php';
+include_once '`TPE2/modelo/libros_modelo.php';
+include_once 'TPE2/vista/libros_vista.php';
 
 class ControladorLibros {
     private $modelo;
