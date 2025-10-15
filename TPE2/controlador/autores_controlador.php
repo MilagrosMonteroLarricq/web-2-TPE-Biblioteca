@@ -24,7 +24,7 @@ class ControladorAutor{
 
     // (B) Listado de ítems por categoría
     //  EL ID VIENE DEL ROUTER COMO ARGUMENTO
-    function showLibrosByAutor($id_autor = null){
+    function showDetalleAutor($id_autor = null){
 
         // 1. Verificar ID
         if (empty($id_autor) || !is_numeric($id_autor)) { 
@@ -33,25 +33,19 @@ class ControladorAutor{
             return;
         }
 
-        // 2. Pide los datos al Modelo
-        $libros = $this->modelo->obtenerLibrosPorId($id_autor);
-
-        // 3. Obtener el nombre del autor para el título
-        $autor = $this->modelo->obtenerLibrosPorId($id_autor); 
-
-        $titulo = "Libros Filtrados";
-        if ($autor) {
-            $titulo = "Libros de: " . $autor['nombre'] . " " . $autor['apellido'];
-        }
+        // 2. Obtener el nombre del autor para el título
+        $autor = $this->modelo->obtenerAutorPorId($id_autor); 
 
         // 4. Mostrar la Vista
-        if (empty($libros)) {
+        if (!$autor) {
             // Si no hay libros, muestra un mensaje o error
             $this->vistaAutor->mostrarError("No se encontraron libros para el autor con ID: " . $id_autor);
         } else{
             //  USAMOS LA VISTA DE LIBROS para mostrar la tabla de ítems
-            $this->vistaLibros->mostrarLibros($libros, $titulo); 
+            $this->vistaLibros->mostrarLibros($autor); 
         }
     }
+
+    
 }
 ?>

@@ -32,7 +32,7 @@ class ControladorLibros {
     // Esto corresponde al método "mostrarLibros" que tenías, corregido para buscar por id_libro.
     function showDetalleLibro() {
         // 1. Verifica el parámetro obligatorio (id_libro)
-        if (!isset($_GET['id_libro']) || empty($_GET['id_libro'])) {
+        if (empty('id_libro')) {
             $this->vista->mostrarError("Debe indicar el ID del libro.");
             return; // Termina la ejecución
         }
@@ -51,9 +51,3 @@ class ControladorLibros {
     }
 }
 ?>
-
-    
-
-    
-
-    

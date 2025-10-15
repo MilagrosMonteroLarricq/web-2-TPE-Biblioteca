@@ -5,6 +5,25 @@ class ControladorSeguridad {
 
     // (A) - Lógica de inicio de sesión
     public function login() {
+        //Creo la cuenta cuando venga en el POST
+        if(!empty($_POST['email'])&& !empty($_POST['password'])){
+        $userEmail=$_POST['email'];
+        $userPassword=$_POST['password'];
+
+        //Obtengo el usuario de la base de datos
+        $db = new PDO('mysql:host=localhost;'.'dbname=db_biblioteca;charset=utf8', 'root', '');
+        $query = $db->prepare('SELECT * FROM users WHERE email = ?');
+        $query->execute([$userEmail]);
+        $user = $query->fetch(PDO::FETCH_OBJ);
+
+        //Si el usuario existe y las contraseñas coinciden
+        if($user && $userPassword==($user->password)){
+            echo "Acceso exitoso";
+        }else{
+            echo "Acceso denegado";
+        }   
+    }
+
     }
 
     // (A) & (B) - Método para verificar si el usuario está logueado

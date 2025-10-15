@@ -22,14 +22,14 @@ switch ($params[0]) {
         $controller = new ControladorLibros();
         $controller->showDetalleLibro($params[1]);
         break;
+    case 'detalleAutor':
+        $controller= new ControladorAutor();
+        $controller->showDetalleAutor($params[1]); 
+        break;
     case 'librosPorAutor':
         $controller = new ControladorAutor();
         $controller->showAutores($params[1]);
         break;
-    case 'mostrarAutor':
-        $controller = new ControladorAutor();
-        $controller->showLibrosByAutor($params[1]);
-        
     case 'login': 
         $controller = new ControladorSeguridad();
         $controller->login();

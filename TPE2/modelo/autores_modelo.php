@@ -10,15 +10,17 @@ class AutorModelo extends Model {
     }
 
     // Obtener libros de un autor específico
-    function obtenerLibrosPorId($id_autor){
+    function obtenerAutorPorId($id_autor){
         $query = $this->db->prepare("
-        SELECT l.* , a.nombre AS nombre_autor, a.apellido AS apellido_autor
-        FROM libros l
-        JOIN autores a ON l.id_autor = a.id_autor
-        WHERE a.id_autor = ?
+        SELECT nombre, apellido, nacionalidad 
+        FROM autores 
+        WHERE id_autor = ?
         ");
         $query->execute([$id_autor]);
-        return $query->fetchAll(PDO::FETCH_OBJ);
+        // Devolvemos solo un objeto/fila
+        return $query->fetch(PDO::FETCH_OBJ); 
     }
+
+    
 }
 ?>
