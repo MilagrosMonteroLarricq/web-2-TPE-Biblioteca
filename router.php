@@ -29,6 +29,16 @@ switch ($params[0]) {
     case 'mostrarAutor':
         $controller = new ControladorAutor();
         $controller->showLibrosByAutor($params[1]);
+        
+    case 'login': 
+        $controller = new ControladorSeguridad();
+        $controller->login();
+        break;
+    case 'logout': // (B) - FUNCIONAL
+        $controller = new ControladorSeguridad(); 
+        $controller->logout();
+        break;
+
     default:
         echo('404 Page not found');
         break;
