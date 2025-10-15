@@ -10,7 +10,7 @@ class AutorModelo extends Model {
     }
 
     // Obtener libros de un autor específico
-    function obtenerLibrosPorAutor($id_autor){
+    function obtenerLibrosPorId($id_autor){
         $query = $this->db->prepare("
         SELECT l.* , a.nombre AS nombre_autor, a.apellido AS apellido_autor
         FROM libros l

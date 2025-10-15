@@ -35,9 +35,6 @@ class LibrosModelo {
 ?>
 
 
-/*  Usa JOIN para traer el nombre y apellido del autor junto con los datos del libro.
-    Permite mostrar el listado completo de libros y también el detalle de uno solo.
-    Usa id_libro y id_autor como están definidos en tus tablas reales 
-*/
+
 
 

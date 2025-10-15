@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
+
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
 
@@ -8,3 +9,4 @@
     RewriteRule ^(.*)$ router.php?action=$1 [QSA,L]
     
 </IfModule>
+

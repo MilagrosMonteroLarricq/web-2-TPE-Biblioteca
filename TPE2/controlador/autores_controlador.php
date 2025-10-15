@@ -1,8 +1,8 @@
 <?php
-      
+
 include_once 'TPE2/modelo/autores_modelo.php'; 
 include_once 'TPE2/vista/autores_vista.phtml'; 
-  
+
 class ControladorAutor{
 
     private $modelo;
@@ -12,7 +12,7 @@ class ControladorAutor{
     function __construct(){
         $this->modelo = new AutorModelo();
         //  Creamos instancias de ambas vistas
-        $this->vistaAutor = new AutorVista();   
+        $this->vistaAutor = new AutorVista();
         $this->vistaLibros = new LibrosVista(); 
     }
 
@@ -34,14 +34,14 @@ class ControladorAutor{
         }
 
         // 2. Pide los datos al Modelo
-        $libros = $this->modelo->obtenerLibrosPorAutor($id_autor);
-        
+        $libros = $this->modelo->obtenerLibrosPorId($id_autor);
+
         // 3. Obtener el nombre del autor para el título
-        $autor = $this->modelo->obtenerLibrosPorAutor($id_autor); 
+        $autor = $this->modelo->obtenerLibrosPorId($id_autor); 
 
         $titulo = "Libros Filtrados";
         if ($autor) {
-            $titulo = "Libros de: " . $autor->nombre . " " . $autor->apellido;
+            $titulo = "Libros de: " . $autor['nombre'] . " " . $autor['apellido'];
         }
 
         // 4. Mostrar la Vista
