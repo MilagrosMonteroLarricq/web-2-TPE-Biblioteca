@@ -27,10 +27,10 @@ class AutorModelo extends Model {
         $query = $this->db->prepare("
             SELECT id_autor, nombre, apellido, nacionalidad
             FROM autores
-            WHERE nombre LIKE ? OR apellido LIKE ?
+            WHERE nombre LIKE ? OR apellido LIKE ? OR CONCAT (nombre, ' ', apellido) LIKE ?
             LIMIT 1
         ");
-        $query->execute([$param, $param]);
+        $query->execute([$param, $param, $param]);
         return $query->fetch(PDO::FETCH_OBJ); // Retorna el objeto autor para usar su ID
     }
 }
