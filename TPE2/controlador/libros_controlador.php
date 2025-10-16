@@ -7,13 +7,11 @@ include_once 'TPE2/vista/libros_vista.phtml';
 class ControladorLibros {
     private $modelo;
     private $vista;
-    private $autoresModelo;
 
     function __construct() {
         // Asumiendo que las clases Modelo y Vista existen en sus respectivos archivos
         $this->modelo = new LibrosModelo();
         $this->vista = new LibrosVista();
-        $this->autoresModelo= new AutorModelo();
     }
 
     // (A) Listado de ítems: Muestra TODOS los libros.
