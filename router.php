@@ -26,6 +26,15 @@ switch ($params[0]) {
         $controller= new ControladorAutor();
         $controller->showDetalleAutor($params[1]); 
         break;
+
+    case 'buscarLibro':
+        $controller= new ControladorLibros();
+        $controller->buscarLibro();
+        break;
+    case 'buscarAutor':
+        $controller= new ControladorAutor();
+        $controller->buscarAutor();
+        break;
     case 'librosPorAutor':
         $controller = new ControladorAutor();
         $controller->showAutores($params[1]);

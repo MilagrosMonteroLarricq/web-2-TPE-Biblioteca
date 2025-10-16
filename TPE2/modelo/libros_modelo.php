@@ -1,12 +1,9 @@
 <?php
+include_once 'TPE2/modelo/modelo.php';
 
-class LibrosModelo {
-    private $db;
+class LibrosModelo extends Model{
 
-    public function __construct() {
-        // Conectamos con la base de datos
-        $this->db = new PDO('mysql:host=localhost;dbname=db_biblioteca;charset=utf8', 'root', '');
-    }
+    
  
     // Obtener todos los libros con su categoría
     public function obtenerLibros() {
@@ -29,6 +26,20 @@ class LibrosModelo {
         ');
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function buscarLibroPorTitulo($titulo_buscado) {
+        $query = $this->db->prepare("
+            SELECT l.*, a.nombre AS nombre_autor, a.apellido AS apellido_autor
+            FROM libros l
+            JOIN autores a ON l.id_autor = a.id_autor
+            WHERE l.titulo LIKE ?
+            LIMIT 1
+        ");
+        // Usamos LIKE con comodín inicial y final para encontrar coincidencias parciales si lo deseas, 
+        // o sin comodines si quieres la coincidencia exacta. Aquí usamos comodines.
+        $query->execute(['%' . $titulo_buscado . '%']); 
+        return $query->fetch(PDO::FETCH_OBJ); 
     }
 }
 

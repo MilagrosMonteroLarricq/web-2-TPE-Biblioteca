@@ -14,23 +14,33 @@
         public function mostrarLibros($libros) {
             ?>
             <h1>Listado de Libros</h1>
+            
+            <h2>Buscar Libro por Título</h2>
+            <form action="buscarLibro" method="GET">
+                <input type="text" name="titulo_libro" placeholder="Ingrese el título del libro" required>
+                <button type="submit">Buscar Libro</button>
+            </form>
+
+            <hr>
+            <h2>Buscar Autor</h2>
+            <form action="buscarAutor" method="GET">
+                <input type="text" name="nombre_autor" placeholder="Ingrese nombre o apellido del autor" required>
+                <button type="submit">Buscar Autor</button>
+            </form>
+            <hr>
+
             <table border="1" cellpadding="5" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Título</th>
-                        <th>Detalle Libro</th> <th>Detalle Autor</th>
+                        <th>Autor</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($libros as $libro): ?>
                         <tr>
                             <td><?= htmlspecialchars($libro->titulo) ?></td>
-                            <td>
-                                <a href="detalleAutor/<?= $libro->id_autor ?>">Ver detalle</a>
-                            </td>
-                            <td>
-                                <a href="detalleLibro/<?= $libro->id_libro ?>">Ver detalle</a>
-                            </td>
+                            <td><?= htmlspecialchars($libro->nombre_autor . ' ' . $libro->apellido_autor)?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -41,14 +51,13 @@
         // Muestra el detalle de un solo libro
         public function mostrarDetalleLibro($libro) {
             ?>
-            <h1>Detalle del Libro</h1>
+            <h1>Detalle del Libro: <?= htmlspecialchars($libro->titulo) ?></h1>
 
             <?php if ($libro): ?>
-                <p><strong>Título:</strong> <?= htmlspecialchars($libro->titulo) ?></p>
                 <p><strong>Género:</strong> <?= htmlspecialchars($libro->genero) ?></p>
                 <p><strong>Año de publicación:</strong> <?= htmlspecialchars($libro->anio_publicacion) ?></p>
                 <p><strong>Editorial:</strong> <?= htmlspecialchars($libro->editorial) ?></p>
-                <a href="listarLibros">Volver al listado</a>
+                <p><strong>Autor:</strong> <?= htmlspecialchars($libro->nombre_autor . ' ' . $libro->apellido_autor) ?></p>
             <?php else: ?>
                 <p>No se encontró el libro solicitado.</p>
             <?php endif; ?>

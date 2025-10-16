@@ -50,6 +50,33 @@
                 <a href="route.php?action=listarLibros">Volver al inicio</a>
                 <?php
             }
+        
+            public function mostrarDetalleAutor($autor) {
+                ?>
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Detalle del Autor</title>
+                </head>
+                <body>
+                    <h1>Detalle del Autor</h1>
+            
+                    <?php if ($autor): ?>
+                        <p><strong>Nombre:</strong> <?= htmlspecialchars($autor->nombre) ?></p>
+                        <p><strong>Apellido:</strong> <?= htmlspecialchars($autor->apellido) ?></p>
+                        <p><strong>Nacionalidad:</strong> <?= htmlspecialchars($autor->nacionalidad) ?></p>
+                        
+                        <hr>
+                        <a href="listarLibros">Volver al listado</a>
+                    <?php else: ?>
+                        <p>No se encontraron datos del autor.</p>
+                    <?php endif; ?>
+                </body>
+                </html>
+                <?php
+            }
+        
         }
     ?>
     </body>
