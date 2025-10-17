@@ -72,6 +72,11 @@
             <a href="listarLibros">volver al listado</a>
             <?php
         }
+
+        public function mostrarLogin($error = null) {
+            // La variable $error estará disponible en login.phtml
+            require 'login.phtml'; 
+        }
     }
     ?>
 </body>

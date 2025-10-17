@@ -1,6 +1,7 @@
 <?php
 include_once 'TPE2/controlador/autores_controlador.php';
 include_once 'TPE2/controlador/libros_controlador.php';
+include_once 'TPE2/controlador/seguridad_controlador.php';
 
 // leemos la accion que viene por parametro
 $action = 'listarLibros'; // acción por defecto

@@ -1,10 +1,26 @@
 <?php
 // seguridad_controlador.php
+include_once '../modelo/usuarios_modelo.php';
+include_once '../vista/libros_vista.phtml';
+include_once '../middlewares/auth.helper.php';
+/*include_once*/
+
 
 class ControladorSeguridad {
 
+    private $modelo;
+    private $vista;
+    private $helper;
+
+    public function __construct(){
+        $this->modelo= new UsuariosModelo;
+        $this->vista= new LibrosVista;
+        $this->helper= new AuthHelper;
+    }
+
     // (A) - Lógica de inicio de sesión
     public function login() {
+        
         //Creo la cuenta cuando venga en el POST
         if(!empty($_POST['email'])&& !empty($_POST['password'])){
         $userEmail=$_POST['email'];
@@ -49,6 +65,31 @@ class ControladorSeguridad {
 
     //4. finaliza la ejecucion del script
     exit();
+    }
+
+    function verify(){
+        $userEmail= $_POST['email'] ?? null;
+        $userPassword=$_POST['password'] ?? null;
+    
+        if (empty($userEmail) || empty($userPassword)){
+            $this->mostrarLoginForm('DEbe completar ambos campos.');
+            return;
+        }
+        $user = $this->modelo->obtenerUsuarioPorEmail($userEmail);
+
+        if ($user && password_verify($userPassword, $user->password)) {
+            // Éxito: iniciar sesión y redirigir
+            $this->helper->login($user); 
+            header("Location: administrarLibros"); // Redirige al área de ABM
+            die();
+        } else {
+            // Fallo: Volver a mostrar el formulario con error
+            $this->mostrarLoginForm('Usuario o contraseña incorrectos.');
+        }
+    }
+
+    public function mostrarLoginForm($error = null) {
+        $this->vista->mostrarLogin($error); 
     }
 }
 ?>
