@@ -64,9 +64,85 @@ class ControladorAutor{
             $this->vistaAutor->mostrarError("No se encontró el autor con el nombre: '{$nombre_buscado}'.");
         }
     }
-    
+
+    // mostrar fomulario de Alta
+    function showFormAgregarAutor(){
+        $this->seguridad->logueado();
+        $this->vistaAutor->mostrarFormularioAlta();
+    }
+
+    // procesar el formulario de Alta
     function agregarAutor(){
+        $this->seguridad->logueado();
+
+        $nombre = $_POST['nombre'] ?? null;
+        $apellido = $_POST['apellido'] ?? null;
+        $nacionalidad = $_POST['nacionalidad'] ?? null;
+
+        if(empty($nombre) || empty($apellido)){
+            $this->vistaAutor->mostrarError("Faltan campos obligatorios (Nombre y Apellido). ");
+            return;
+        }
+
+        //llama al modelo
+        $this->modelo->agregarAutor($nombre, $apellido, $nacionalidad);
+
+        header("Location: route.php?action=listarAutores");
+        exit;
+    }
+
+    // mostrar el formulario de edicion
+    function showFormEditarAutor($id_autor = null){
+        $this->seguridad->logueado();
+
+        if(empty($id_autor)){
+            $this->vistaAutor->mostrarError("ID de autor no especificado para edición.");
+            return;
+        }
+
+        $autor = $this->modelo->obtenerAutorPorId($id_autor);
+
+        if ($autor){
+            $this->vistaAutor->mostrarFormularioEdicion($autor);
+        } else {
+            $this->vistaAutor->mostrarError("Autor a editar no encontrado.");
+        }
+    }
+
+    //procesar el formulario de edicion
+    function editarAutor() {
+        $this->seguridad->logueado(); // PROTECCIÓN
+
+        $id = $_POST['id_autor'] ?? null;
+        $nombre = $_POST['nombre'] ?? null;
+        $apellido = $_POST['apellido'] ?? null;
+        $nacionalidad = $_POST['nacionalidad'] ?? null;
         
+        if (empty($id) || empty($nombre) || empty($apellido)) {
+            $this->vistaAutor->mostrarError("Faltan datos obligatorios para la edición.");
+            return;
+        }
+
+        // Llamamos al modelo (Tu modelo SÓLO acepta 4 parámetros: id, nombre, apellido, nacionalidad)
+        $this->modelo->editarAutor($id, $nombre, $apellido, $nacionalidad);
+
+        header("Location: route.php?action=listarAutores");
+        exit;
+    }
+    
+    // 5. Eliminar autor (Baja)
+    function eliminarAutor($id_autor = null) {
+        $this->seguridad->logueado(); // PROTECCIÓN
+        
+        if (empty($id_autor) || !is_numeric($id_autor)) {
+            $this->vistaAutor->mostrarError("Debe indicar un ID de autor válido para eliminar.");
+            return;
+        }
+        
+        $this->modelo->eliminarAutor($id_autor);
+
+        header("Location: route.php?action=listarAutores");
+        exit;
     }
 }
 ?>

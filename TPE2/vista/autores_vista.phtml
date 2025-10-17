@@ -3,81 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title></title>
 </head>
-<body>
-    <?php
-        class AutorVista {
-            function mostrarListadoAutores($autores) {
-                ?>
-                <!DOCTYPE html>
-                <html lang="es">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Listado de Autores</title>
-                </head>
-                <body>
-                    <h1>Listado de Autores (Categorías)</h1>
-                    <p>
-                        <a href="route.php?action=listarLibros">Ver todos los libros</a>
-                    </p>
-                    <hr>
- 
-                    <?php if (empty($autores)): ?>
-                        <p>No hay autores registrados.</p>
-                    <?php else: ?>
-                        <ul>
-                            <?php foreach ($autores as $autor): ?>
-                                <li>
-                                    <a href="route.php?action=librosPorAutor/<?= $autor->id_autor ?>">
-                                        <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </body>
-                </html>
-                <?php
-            }
 
+<body>
+<?php
+    class AutorVista {
+        function mostrarListadoAutores($autores) {
+        ?>
+    <!DOCTYPE html>
+    <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Listado de Autores</title>
+        </head>
+
+        <body>
+            <h1>Listado de Autores (Categorías)</h1>
+            <p>
+                <a href="route.php?action=listarLibros">Ver todos los libros</a>
+                <a href="route.php?action=agregarAutorForm">Agregar Nueva Categoría (Autor)</a>
+            </p>
+                <hr>
+            <?php if (empty($autores)): ?>
+                <p>No hay autores registrados.</p>
+            <?php else: ?>
+                
+                <ul>
+                    <?php foreach ($autores as $autor): ?>
+                        <li>    
+                            <a href="route.php?action=librosPorAutor/<?= $autor->id_autor ?>">
+                                <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?>
+                            </a>
+                                [ <a href="route.php?action=editarAutorForm/<?= $autor->id_autor ?>">Editar</a> ]
+                                [ <a href="route.php?action=eliminarAutor/<?= $autor->id_autor ?>">Eliminar</a> ]
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </body>
+        </html>
+    <?php
+        }
+            
             // Método auxiliar para errores que podría usar el ControladorAutor
-            public function mostrarError($mensaje) {
-                ?>
-                <h1>Error de Autor</h1>
+        function mostrarError($mensaje) {
+            ?>
+            <h1>Error de Autor</h1>
                 <p><?= htmlspecialchars($mensaje) ?></p>
                 <a href="route.php?action=listarLibros">Volver al inicio</a>
-                <?php
+        <?php
             }
         
-            public function mostrarDetalleAutor($autor) {
-                ?>
-                <!DOCTYPE html>
-                <html lang="es">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Detalle del Autor</title>
-                </head>
-                <body>
-                    <h1>Detalle del Autor</h1>
+        function mostrarDetalleAutor($autor) {
+            ?>
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <title>Detalle del Autor</title>
+            </head>
+
+            <body>
+                <h1>Detalle del Autor</h1>
             
-                    <?php if ($autor): ?>
-                        <p><strong>Nombre:</strong> <?= htmlspecialchars($autor->nombre) ?></p>
-                        <p><strong>Apellido:</strong> <?= htmlspecialchars($autor->apellido) ?></p>
-                        <p><strong>Nacionalidad:</strong> <?= htmlspecialchars($autor->nacionalidad) ?></p>
+                <?php if ($autor): ?>
+                    <p><strong>Nombre:</strong> <?= htmlspecialchars($autor->nombre) ?></p>
+                    <p><strong>Apellido:</strong> <?= htmlspecialchars($autor->apellido) ?></p>
+                    <p><strong>Nacionalidad:</strong> <?= htmlspecialchars($autor->nacionalidad) ?></p>
                         
                         <hr>
                         <a href="listarLibros">Volver al listado</a>
-                    <?php else: ?>
+                <?php else: ?>
                         <p>No se encontraron datos del autor.</p>
-                    <?php endif; ?>
-                </body>
-                </html>
-                <?php
+                <?php endif; ?>
+            </body>
+        </html>
+            <?php
             }
-        
+
+        function mostrarFormularioAlta() {
+            ?>
+                <h1>Agregar Autor</h1>
+                <form method="POST" action="route.php?action=agregarAutor">
+
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" required><br><br>
+
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" name="apellido" required><br><br>
+
+                    <label for="nacionalidad">Nacionalidad:</label>
+                    <input type="text" name="nacionalidad"><br><br>
+                        
+                    <button type="submit">Guardar Categoría</button>
+                    <a href="route.php?action=listarAutores">Cancelar</a>
+                </form>
+            <?php
         }
-    ?>
+
+            function mostrarFormularioEdicion($autor) {
+                ?>
+                <h1>Editar Categoría: <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?></h1>
+                    <form method="POST" action="route.php?action=editarAutor">
+                            
+                        <input type="hidden" name="id_autor" value="<?= $autor->id_autor ?>">
+                            
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" value="<?= htmlspecialchars($autor->nombre) ?>" required><br><br>
+
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" value="<?= htmlspecialchars($autor->apellido) ?>" required><br><br>
+
+                        <label for="nacionalidad">Nacionalidad:</label>
+                        <input type="text" name="nacionalidad" value="<?= htmlspecialchars($autor->nacionalidad ?? '') ?>"><br><br>
+                            
+                        <label for="foto_url">URL Foto (opcional):</label>
+                        <input type="text" name="foto_url" value=""><br><br>
+
+                        <button type="submit">Guardar Cambios</button>
+                        <a href="route.php?action=listarAutores">Cancelar</a>
+                    </form>
+                <?php
+                }          
+            }
+        ?>
     </body>
 </html>
