@@ -42,8 +42,12 @@ class LibrosModelo extends Model{
         return $query->fetch(PDO::FETCH_OBJ); 
     }
 }
-
 ?>
+
+
+
+
+
 
 
 

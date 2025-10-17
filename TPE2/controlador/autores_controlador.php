@@ -1,17 +1,18 @@
 <?php
-
 include_once 'TPE2/modelo/autores_modelo.php'; 
 include_once 'TPE2/vista/autores_vista.phtml'; 
+include_once 'TPE2/controlador/seguridad_controlador.php';
 
 class ControladorAutor{
 
     private $modelo;
     private $vistaAutor;  // Usado para listar autores y errores
+    PRIVATE $seguridad;
 
     function __construct(){
         $this->modelo = new AutorModelo();
-        //  Creamos instancias de ambas vistas
         $this->vistaAutor = new AutorVista();
+        $this->seguridad = new ControladorSeguridad();
     }
 
     // (B) Listado de categorías (autores)
@@ -63,7 +64,9 @@ class ControladorAutor{
             $this->vistaAutor->mostrarError("No se encontró el autor con el nombre: '{$nombre_buscado}'.");
         }
     }
-
     
+    function agregarAutor(){
+        
+    }
 }
 ?>
