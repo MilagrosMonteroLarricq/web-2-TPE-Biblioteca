@@ -41,14 +41,24 @@ switch ($params[0]) {
         // cambiamos a showAutores para que use el método que lista libros por autor
         $controller->showDetalleAutor($params[1]);
         break;
+
     case 'login': 
+        // Muestra el formulario de login (GET)
         $controller = new ControladorSeguridad();
-        $controller->login();
+        $controller->mostrarLoginForm(); 
         break;
-    case 'logout': // (B) - FUNCIONAL
+
+    case 'verify': 
+        // Procesa la petición POST del formulario de login
+        $controller = new ControladorSeguridad();
+        $controller->verify();
+        break;
+        
+    case 'logout':
         $controller = new ControladorSeguridad(); 
         $controller->logout();
         break;
+        
     case 'agregarAutorForm': // Muestra el formulario de Alta (GET)
         $controller = new ControladorAutor();
         $controller->showFormAgregarAutor();

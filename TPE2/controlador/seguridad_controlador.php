@@ -1,10 +1,8 @@
 <?php
 // seguridad_controlador.php
-include_once '../modelo/usuarios_modelo.php';
-include_once '../vista/libros_vista.phtml';
-include_once '../middlewares/auth.helper.php';
-/*include_once*/
-
+include_once 'TPE2/modelo/usuario_modelo.php'; // Asumo que el modelo se llama usuarios.php
+include_once 'TPE2/vista/libros_vista.phtml'; // Asumo que esta vista contiene mostrarLogin()
+include_once 'TPE2/middlewares/auth.helper.php';
 
 class ControladorSeguridad {
 
@@ -13,83 +11,48 @@ class ControladorSeguridad {
     private $helper;
 
     public function __construct(){
-        $this->modelo= new UsuariosModelo;
-        $this->vista= new LibrosVista;
-        $this->helper= new AuthHelper;
-    }
-
-    // (A) - Lógica de inicio de sesión
-    public function login() {
-        
-        //Creo la cuenta cuando venga en el POST
-        if(!empty($_POST['email'])&& !empty($_POST['password'])){
-        $userEmail=$_POST['email'];
-        $userPassword=$_POST['password'];
-
-        //Obtengo el usuario de la base de datos
-        $db = new PDO('mysql:host=localhost;'.'dbname=db_biblioteca;charset=utf8', 'root', '');
-        $query = $db->prepare('SELECT * FROM users WHERE email = ?');
-        $query->execute([$userEmail]);
-        $user = $query->fetch(PDO::FETCH_OBJ);
-
-        //Si el usuario existe y las contraseñas coinciden
-        if($user && $userPassword==($user->password)){
-            echo "Acceso exitoso";
-        }else{
-            echo "Acceso denegado";
-        }   
-    }
-
-    }
-
-    // (A) & (B) - Método para verificar si el usuario está logueado
-    public function logueado() {
-        session_start();
-        // Si no está logueado, redirige al formulario de login
-        if (!isset($_SESSION['ADMIN_LOGUEADO']) || $_SESSION['ADMIN_LOGUEADO'] !== true) {
-            header("Location: login.php");
-            exit();
-        }
+        $this->modelo = new UsuariosModelo(); // Inicializamos el modelo
+        $this->vista = new LibrosVista(); // Asumo que esta vista contiene el método mostrarLogin
+        $this->helper = new AuthHelper();
     }
     
-    // (B) - Método de deslogueo (Logout) - TU CÓDIGO FUNCIONAL
-    function logout(){
-    //1. inicia la sesion
-    session_start();
-
-    //2. destruye todas las variables de la sesion
-    session_destroy();
-
-    //3. redirige al usuario a la pagina de inicio de sesion
-    header("location: login.php");
-
-    //4. finaliza la ejecucion del script
-    exit();
+    // Muestra el formulario de login (GET)
+    public function mostrarLoginForm($error = null) {
+        // En lugar de usar una vista específica, simplemente le pedimos a la vista LibrosVista que muestre el formulario de login.
+        $this->vista->mostrarLogin($error); 
     }
 
+    // Procesa el POST del login (POST action="verify")
     function verify(){
         $userEmail= $_POST['email'] ?? null;
         $userPassword=$_POST['password'] ?? null;
     
         if (empty($userEmail) || empty($userPassword)){
-            $this->mostrarLoginForm('DEbe completar ambos campos.');
+            $this->mostrarLoginForm('Debe completar ambos campos.');
             return;
         }
+        
+        // 1. Obtener usuario del modelo
         $user = $this->modelo->obtenerUsuarioPorEmail($userEmail);
 
+        // 2. Verificar usuario y contraseña (usando password_verify)
         if ($user && password_verify($userPassword, $user->password)) {
             // Éxito: iniciar sesión y redirigir
             $this->helper->login($user); 
-            header("Location: administrarLibros"); // Redirige al área de ABM
+            // Redirige al listado de libros (donde se ve la opción ABM)
+            header("Location: listarLibros"); 
             die();
         } else {
             // Fallo: Volver a mostrar el formulario con error
             $this->mostrarLoginForm('Usuario o contraseña incorrectos.');
         }
     }
-
-    public function mostrarLoginForm($error = null) {
-        $this->vista->mostrarLogin($error); 
+    
+    // Cierre de sesión (Logout)
+    function logout(){
+        $this->helper->logout(); // Uso del AuthHelper
     }
+    
+    // NOTA: ELIMINAR EL MÉTODO logueado() y usar AuthHelper::checkLoggedIn() directamente en los controladores ABM.
 }
 ?>
