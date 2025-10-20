@@ -85,6 +85,31 @@ switch ($params[0]) {
         $controller->eliminarAutor($params[1]);
         break;
 
+    case 'agregarLibroForm':
+        $controller= new ControladorLibros();
+        $controller->showFormAgregarLibro();
+        break;
+
+    case 'agregarLibro':
+        $controller = new ControladorLibros();
+        $controller->agregarLibro();
+        break;
+    
+    case 'editarLibroForm':
+        $controller = new ControladorLibros();
+        $controller->showFormEditarLibro($params[1]);
+        break;
+
+    case 'editarLibro':
+        $controller= new ControladorLibros;
+        $controller->editarLibro();
+        break;
+    
+    case 'eliminarLibro':
+        $controller=new ControladorLibros();
+        $controller->eliminarLibro();
+        break;
+
     default:
         echo('404 Page not found');
         break;

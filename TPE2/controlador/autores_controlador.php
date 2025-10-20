@@ -69,7 +69,7 @@ class ControladorAutor{
         } else {
             $this->vistaAutor->mostrarError("No se encontró el autor con el nombre: '{$nombre_buscado}'.");
         }
-    }
+    } 
 
     // mostrar fomulario de Alta - Protegido por AuthHelper
     function showFormAgregarAutor(){
