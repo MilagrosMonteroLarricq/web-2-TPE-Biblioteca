@@ -65,6 +65,7 @@ switch ($params[0]) {
         $controller = new ControladorAutor();
         $controller->showAutores(); // Llama al método que lista todas las categorías
         break;
+
         
     case 'agregarAutorForm': // Muestra el formulario de Alta (GET)
         $controller = new ControladorAutor();
