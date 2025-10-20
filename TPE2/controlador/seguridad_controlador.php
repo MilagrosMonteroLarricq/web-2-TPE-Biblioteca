@@ -40,7 +40,7 @@ class ControladorSeguridad {
             // Éxito: iniciar sesión y redirigir
             $this->helper->login($user); 
             // Redirige al listado de libros (donde se ve la opción ABM)
-            header("Location: listarLibros"); 
+            header("Location: listarLibros"); //admin
             die();
         } else {
             // Fallo: Volver a mostrar el formulario con error

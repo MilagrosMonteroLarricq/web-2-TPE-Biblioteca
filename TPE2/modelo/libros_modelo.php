@@ -2,7 +2,6 @@
 include_once 'TPE2/modelo/modelo.php';
 
 class LibrosModelo extends Model{
-
     // Obtener todos los libros con su categoría
     public function obtenerLibros() {
         $query = $this->db->prepare('
@@ -63,9 +62,19 @@ class LibrosModelo extends Model{
 
 
     // Modificacion - UPDATE
-    function editarLibro($id_libro, $titulo, $genero, $anio_publicacion, $editorial, $id_autor){
-        $query = $this->db->prepare("UPDATE libros SET titulo = ?, genero = ?, anio_publicacion = ?, $editorial = ?, $id_autor WHERE id_libro = ?");
-        return $query->execute([$titulo, $genero, $anio_publicacion, $editorial, $id_autor, $id_libro]);
+    function editarLibro($id_libro, $titulo, $genero, $anio_publicacion, $editorial, $id_autor){ 
+        $query = $this->db->prepare("
+            UPDATE libros SET 
+                titulo = ?, 
+                genero = ?, 
+                anio_publicacion = ?, 
+                editorial = ?, 
+                id_autor = ? 
+            WHERE id_libro = ?
+        ");
+        
+        // 6 valores pasados: [Titulo, Genero, Año, Editorial, AutorID] (SET) y [LibroID] (WHERE)
+        return $query->execute([$titulo, $genero, $anio_publicacion, $editorial, $id_autor, $id_libro]); 
     }
 
     // Baja - DELETE

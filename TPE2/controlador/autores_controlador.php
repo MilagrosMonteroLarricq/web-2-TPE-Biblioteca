@@ -90,7 +90,7 @@ class ControladorAutor{
         }
 
         $this->modeloAutor->agregarAutor($nombre, $apellido, $nacionalidad);
-        header("Location: route.php?action=listarAutores");
+        header("Location: route.php?action=admin");
         exit;
     }
 
@@ -124,7 +124,7 @@ class ControladorAutor{
         }
 
         $this->modeloAutor->editarAutor($id, $nombre, $apellido, $nacionalidad);
-        header("Location: route.php?action=listarAutores");
+        header("Location: route.php?action=admin");
         exit;
     }
 
@@ -137,7 +137,7 @@ class ControladorAutor{
         }
         
         $this->modeloAutor->eliminarAutor($id_autor);
-        header("Location: route.php?action=listarAutores");
+        header("Location: route.php?action=admin");
         exit;
     }
 }
