@@ -41,6 +41,27 @@ class LibrosModelo extends Model{
         $query->execute(['%' . $titulo_buscado . '%']); 
         return $query->fetch(PDO::FETCH_OBJ); 
     }
+
+    function agregarLibro($titulo, $genero, $anio_publicacion, $editorial, $id_autor){
+        $query = $this->db->prepare("
+            INSERT INTO libros (titulo, genero, anio_publicacion, editorial, id_autor) 
+            VALUES (?, ?, ?, ?, ?)
+        ");
+        return $query->execute([$titulo, $genero, $anio_publicacion, $editorial, $id_autor]);
+    }
+
+
+    // Modificacion - UPDATE
+    function editarLibro($id_libro, $titulo, $genero, $anio_publicacion, $editorial, $id_autor){
+        $query = $this->db->prepare("UPDATE libros SET titulo = ?, genero = ?, anio_publicacion = ?, $editorial = ?, $id_autor WHERE id_libro = ?");
+        return $query->execute([$titulo, $genero, $anio_publicacion, $editorial, $id_autor, $id_libro]);
+    }
+
+    // Baja - DELETE
+    function eliminarLibro($id_libro){
+        $query = $this->db->prepare("DELETE FROM libros WHERE id_libro = ?");
+        return $query->execute([$id_libro]);
+    }
 }
 ?>
 

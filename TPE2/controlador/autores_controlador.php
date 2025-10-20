@@ -62,7 +62,7 @@ class ControladorAutor{
             // 3. Fallo: Muestra un mensaje de error
             $this->vistaAutor->mostrarError("No se encontró el autor con el nombre: '{$nombre_buscado}'.");
         }
-    }
+    } 
 
     // mostrar fomulario de Alta
     function showFormAgregarAutor(){
