@@ -99,7 +99,7 @@ class ControladorLibros {
     function showFormEditarLibro($id_libro = null){
         AuthHelper::checkLoggedIn();
 
-        if(empty($id_libro)){
+        if(empty($id_libro) || !is_numeric($id_libro)){
             $this->vistaLibro->mostrarError("ID de libro no especificado para edición.");
             return;
         }
@@ -138,7 +138,7 @@ class ControladorLibros {
     function eliminarLibro($id_libro = null) {
         AuthHelper::checkLoggedIn();
         if (empty($id_libro) || !is_numeric($id_libro)) {
-            $this->vistaLibro->mostrarError("Debe indicar un ID de autor válido para eliminar.");
+            $this->vistaLibro->mostrarError("Debe indicar un ID de libro válido para eliminar.");
             return;
         }
 

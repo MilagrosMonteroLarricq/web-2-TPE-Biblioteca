@@ -119,7 +119,7 @@ switch ($params[0]) {
     
     case 'eliminarLibro':
         $controller=new ControladorLibros();
-        $controller->eliminarLibro();
+        $controller->eliminarLibro($params[1]);
         break;
 
     default:

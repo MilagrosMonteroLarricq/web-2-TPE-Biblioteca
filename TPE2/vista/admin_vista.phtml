@@ -62,9 +62,9 @@ class AdminVista{
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>Título</th>
-                    <th>Autor ID</th>
+                    <!--<th>Autor ID</th>-->
                     <th>Género</th>
                     <th>Acciones</th>
                 </tr>
@@ -72,9 +72,9 @@ class AdminVista{
             <tbody>
                 <?php foreach ($libros as $libro): ?> 
                 <tr>
-                    <td><?= htmlspecialchars($libro->id_libro) ?></td>
+                    <!--<td><?= htmlspecialchars($libro->id_libro) ?></td>-->
                     <td><?= htmlspecialchars($libro->titulo) ?></td>
-                    <td><?= htmlspecialchars($libro->id_autor) ?></td> 
+                    <!--<td><?= htmlspecialchars($libro->id_autor) ?></td>-->
                     <td><?= htmlspecialchars($libro->genero) ?></td>
                     <td>
                         <a href="route.php?action=editarLibroForm/<?= $libro->id_libro ?>">Editar</a> | 
