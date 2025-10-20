@@ -23,8 +23,8 @@
         <body>
             <h1>Listado de Autores (Categorías)</h1>
             <p>
-                <a href="route.php?action=listarLibros">Ver todos los libros</a>
-                <a href="route.php?action=agregarAutorForm">Agregar Nueva Categoría (Autor)</a>
+                <a href="route.php?action=listarLibros">Ver todos los libros</a><br>
+                <a href="route.php?action=agregarAutorForm">Agregar Nueva Categoría</a><br>
             </p>
                 <hr>
             <?php if (empty($autores)): ?>
@@ -119,10 +119,7 @@
 
                         <label for="nacionalidad">Nacionalidad:</label>
                         <input type="text" name="nacionalidad" value="<?= htmlspecialchars($autor->nacionalidad ?? '') ?>"><br><br>
-                            
-                        <label for="foto_url">URL Foto (opcional):</label>
-                        <input type="text" name="foto_url" value=""><br><br>
-
+        
                         <button type="submit">Guardar Cambios</button>
                         <a href="route.php?action=listarAutores">Cancelar</a>
                     </form>

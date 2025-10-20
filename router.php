@@ -23,10 +23,6 @@ switch ($params[0]) {
         $controller = new ControladorLibros();
         $controller->showDetalleLibro($params[1]);
         break;
-    case 'detalleAutor':
-        $controller= new ControladorAutor();
-        $controller->showDetalleAutor($params[1]); 
-        break;
 
     case 'buscarLibro':
         $controller= new ControladorLibros();
@@ -57,6 +53,11 @@ switch ($params[0]) {
     case 'logout':
         $controller = new ControladorSeguridad(); 
         $controller->logout();
+        break;
+
+    case 'listarAutores':
+        $controller = new ControladorAutor();
+        $controller->showAutores(); // Llama al método que lista todas las categorías
         break;
         
     case 'agregarAutorForm': // Muestra el formulario de Alta (GET)

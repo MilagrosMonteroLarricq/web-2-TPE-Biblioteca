@@ -1,7 +1,7 @@
 <?php
-// seguridad_controlador.php
-include_once 'TPE2/modelo/usuario_modelo.php'; // Asumo que el modelo se llama usuarios.php
-include_once 'TPE2/vista/libros_vista.phtml'; // Asumo que esta vista contiene mostrarLogin()
+
+include_once 'TPE2/modelo/usuario_modelo.php'; 
+include_once 'TPE2/vista/login.phtml'; 
 include_once 'TPE2/middlewares/auth.helper.php';
 
 class ControladorSeguridad {
@@ -11,14 +11,14 @@ class ControladorSeguridad {
     private $helper;
 
     public function __construct(){
-        $this->modelo = new UsuariosModelo(); // Inicializamos el modelo
-        $this->vista = new LibrosVista(); // Asumo que esta vista contiene el método mostrarLogin
+        $this->modelo = new UsuariosModelo(); 
+        $this->vista = new LoginVista(); 
         $this->helper = new AuthHelper();
     }
     
     // Muestra el formulario de login (GET)
     public function mostrarLoginForm($error = null) {
-        // En lugar de usar una vista específica, simplemente le pedimos a la vista LibrosVista que muestre el formulario de login.
+
         $this->vista->mostrarLogin($error); 
     }
 
