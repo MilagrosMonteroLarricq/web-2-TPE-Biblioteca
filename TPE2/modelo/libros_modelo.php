@@ -2,8 +2,6 @@
 include_once 'TPE2/modelo/modelo.php';
 
 class LibrosModelo extends Model{
-
-    
  
     // Obtener todos los libros con su categoría
     public function obtenerLibros() {
