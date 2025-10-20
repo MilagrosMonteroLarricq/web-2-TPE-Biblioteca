@@ -2,7 +2,7 @@
 include_once 'TPE2/modelo/modelo.php';
 
 class LibrosModelo extends Model{
- 
+
     // Obtener todos los libros con su categoría
     public function obtenerLibros() {
         $query = $this->db->prepare('
@@ -25,6 +25,19 @@ class LibrosModelo extends Model{
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
+
+    public function obtenerLibrosPorAutor($id_autor) {
+        // La consulta es similar a obtenerLibros(), pero con un filtro WHERE
+        $query = $this->db->prepare('
+            SELECT libros.*, autores.nombre AS nombre_autor, autores.apellido AS apellido_autor
+            FROM libros
+            JOIN autores ON libros.id_autor = autores.id_autor
+            WHERE libros.id_autor = ?
+        ');
+        $query->execute([$id_autor]);
+        return $query->fetchAll(PDO::FETCH_OBJ); // Devuelve un array de libros
+    }
+
 
     public function buscarLibroPorTitulo($titulo_buscado) {
         $query = $this->db->prepare("

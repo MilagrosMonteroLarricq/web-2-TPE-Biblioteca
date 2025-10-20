@@ -2,11 +2,12 @@
 include_once 'TPE2/controlador/autores_controlador.php';
 include_once 'TPE2/controlador/libros_controlador.php';
 include_once 'TPE2/controlador/seguridad_controlador.php';
+include_once 'TPE2/controlador/home_controlador.php';
 
 // leemos la accion que viene por parametro
-$action = 'listarLibros'; // acción por defecto
+$action = 'home'; 
 
-if (!empty($_GET['action'])) { // si viene definida la reemplazamos
+if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
@@ -15,6 +16,11 @@ $params = explode('/', $action);
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
+    case 'home':
+        $controller = new ControladorHome();
+        $controller->showHome();
+        break;
+
     case 'listarLibros':
         $controller = new ControladorLibros();
         $controller->showLibros();
@@ -22,10 +28,6 @@ switch ($params[0]) {
     case 'detalleLibros':
         $controller = new ControladorLibros();
         $controller->showDetalleLibro($params[1]);
-        break;
-    case 'detalleAutor':
-        $controller= new ControladorAutor();
-        $controller->showDetalleAutor($params[1]); 
         break;
 
     case 'buscarLibro':
@@ -57,6 +59,11 @@ switch ($params[0]) {
     case 'logout':
         $controller = new ControladorSeguridad(); 
         $controller->logout();
+        break;
+
+    case 'listarAutores':
+        $controller = new ControladorAutor();
+        $controller->showAutores(); // Llama al método que lista todas las categorías
         break;
         
     case 'agregarAutorForm': // Muestra el formulario de Alta (GET)

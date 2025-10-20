@@ -1,0 +1,28 @@
+<?php
+class HomeVista {
+    public function showHome() {
+        ?>
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Biblioteca TUDAI - Inicio</title>
+            </head>
+        <body>
+            <h1>Bienvenido a la Biblioteca Digital</h1>
+            
+            <h2>Explorar Contenido</h2>
+            <p>
+                <a href="route.php?action=listarLibros">Ver Listado Completo de Libros</a> 
+                (Acceso Público)
+            </p>
+
+            <h2>Administración</h2>
+            <p>
+                <a href="route.php?action=login">Acceder al Panel de Administración</a> 
+            </p>
+        </body>
+        </html>
+        <?php
+    }
+}

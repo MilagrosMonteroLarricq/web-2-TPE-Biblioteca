@@ -23,8 +23,8 @@
         <body>
             <h1>Listado de Autores (Categorías)</h1>
             <p>
-                <a href="route.php?action=listarLibros">Ver todos los libros</a>
-                <a href="route.php?action=agregarAutorForm">Agregar Nueva Categoría (Autor)</a>
+                <a href="route.php?action=listarLibros">Ver todos los libros</a><br>
+                <a href="route.php?action=agregarAutorForm">Agregar Nueva Categoría</a><br>
             </p>
                 <hr>
             <?php if (empty($autores)): ?>
@@ -54,8 +54,8 @@
             <h1>Error de Autor</h1>
                 <p><?= htmlspecialchars($mensaje) ?></p>
                 <a href="route.php?action=listarLibros">Volver al inicio</a>
-            <?php
-        }
+        <?php
+            }
         
         function mostrarDetalleAutor($autor) {
             ?>
@@ -80,9 +80,9 @@
                         <p>No se encontraron datos del autor.</p>
                 <?php endif; ?>
             </body>
-            </html>
+        </html>
             <?php
-        }
+            }
 
         function mostrarFormularioAlta() {
             ?>
@@ -104,31 +104,30 @@
             <?php
         }
 
-        function mostrarFormularioEdicion($autor) {
-            ?>
-            <h1>Editar Categoría: <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?></h1>
-                <form method="POST" action="route.php?action=editarAutor">
-                        
-                    <input type="hidden" name="id_autor" value="<?= $autor->id_autor ?>">
-                        
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre" value="<?= htmlspecialchars($autor->nombre) ?>" required><br><br>
+            function mostrarFormularioEdicion($autor) {
+                ?>
+                <h1>Editar Categoría: <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?></h1>
+                    <form method="POST" action="route.php?action=editarAutor">
+                            
+                        <input type="hidden" name="id_autor" value="<?= $autor->id_autor ?>">
+                            
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" value="<?= htmlspecialchars($autor->nombre) ?>" required><br><br>
 
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" name="apellido" value="<?= htmlspecialchars($autor->apellido) ?>" required><br><br>
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" value="<?= htmlspecialchars($autor->apellido) ?>" required><br><br>
 
-                    <label for="nacionalidad">Nacionalidad:</label>
-                    <input type="text" name="nacionalidad" value="<?= htmlspecialchars($autor->nacionalidad ?? '') ?>"><br><br>
-                        
-                    <label for="foto_url">URL Foto (opcional):</label>
-                    <input type="text" name="foto_url" value=""><br><br>
-
-                    <button type="submit">Guardar Cambios</button>
-                    <a href="route.php?action=listarAutores">Cancelar</a>
-                </form>
-            <?php
-            }          
-        }
-    ?>
-</body>
+                        <label for="nacionalidad">Nacionalidad:</label>
+                        <input type="text" name="nacionalidad" value="<?= htmlspecialchars($autor->nacionalidad ?? '') ?>"><br><br>
+        
+                        <button type="submit">Guardar Cambios</button>
+                        <a href="route.php?action=listarAutores">Cancelar</a>
+                    </form>
+                <?php
+                }          
+            }
+        ?>
+    </body>
 </html>
+
+
