@@ -3,6 +3,7 @@ include_once 'TPE2/controlador/autores_controlador.php';
 include_once 'TPE2/controlador/libros_controlador.php';
 include_once 'TPE2/controlador/seguridad_controlador.php';
 include_once 'TPE2/controlador/home_controlador.php';
+include_once 'TPE2/controlador/controlador_admin.php';
 
 // leemos la accion que viene por parametro
 $action = 'home'; 
@@ -64,6 +65,11 @@ switch ($params[0]) {
     case 'listarAutores':
         $controller = new ControladorAutor();
         $controller->showAutores(); // Llama al método que lista todas las categorías
+        break;
+    
+    case 'admin':
+        $controller = new ControladorAdministrador(); 
+        $controller->showPanelAdmin();
         break;
         
     case 'agregarAutorForm': // Muestra el formulario de Alta (GET)
