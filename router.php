@@ -2,11 +2,12 @@
 include_once 'TPE2/controlador/autores_controlador.php';
 include_once 'TPE2/controlador/libros_controlador.php';
 include_once 'TPE2/controlador/seguridad_controlador.php';
+include_once 'TPE2/controlador/home_controlador.php';
 
 // leemos la accion que viene por parametro
-$action = 'listarLibros'; // acción por defecto
+$action = 'home'; 
 
-if (!empty($_GET['action'])) { // si viene definida la reemplazamos
+if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
@@ -15,6 +16,11 @@ $params = explode('/', $action);
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
+    case 'home':
+        $controller = new ControladorHome();
+        $controller->showHome();
+        break;
+
     case 'listarLibros':
         $controller = new ControladorLibros();
         $controller->showLibros();
