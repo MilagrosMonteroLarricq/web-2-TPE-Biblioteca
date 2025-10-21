@@ -73,13 +73,13 @@ class ControladorAutor{
 
     // mostrar fomulario de Alta - Protegido por AuthHelper
     function showFormAgregarAutor(){
-        AuthHelper::checkLoggedIn();
+       
         $this->vistaAutor->mostrarFormularioAlta();
     }
 
     // procesar el formulario de Alta
     function agregarAutor(){
-        AuthHelper::checkLoggedIn();
+        
         $nombre = $_POST['nombre'] ?? null;
         $apellido = $_POST['apellido'] ?? null;
         $nacionalidad = $_POST['nacionalidad'] ?? null;
@@ -96,7 +96,7 @@ class ControladorAutor{
 
     // mostrar el formulario de edicion - Protegido por AuthHelper
     function showFormEditarAutor($id_autor = null) {
-        AuthHelper::checkLoggedIn();
+        
         if (empty($id_autor)) {
             $this->vistaAutor->mostrarError("ID de autor no especificado para edición.");
             return;
@@ -112,7 +112,6 @@ class ControladorAutor{
     
     // procesar el formulario de edicion
     function editarAutor() {
-        AuthHelper::checkLoggedIn();
         $id = $_POST['id_autor'] ?? null;
         $nombre = $_POST['nombre'] ?? null;
         $apellido = $_POST['apellido'] ?? null;
@@ -130,7 +129,6 @@ class ControladorAutor{
 
     // 5. Eliminar autor (Baja) - Protegido por AuthHelper
     function eliminarAutor($id_autor = null) {
-        AuthHelper::checkLoggedIn();
         if (empty($id_autor) || !is_numeric($id_autor)) {
             $this->vistaAutor->mostrarError("Debe indicar un ID de autor válido para eliminar.");
             return;

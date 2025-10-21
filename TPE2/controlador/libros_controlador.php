@@ -70,12 +70,10 @@ class ControladorLibros {
     }
 
     function showFormAgregarLibro(){
-        AuthHelper::checkLoggedIn();
         $this->vistaLibro->mostrarFormularioAltaLibro();
     }
 
     function agregarLibro(){
-        AuthHelper::checkLoggedIn();
 
         $titulo = $_POST['titulo'] ?? null;
         $genero = $_POST['genero'] ?? null;
@@ -97,7 +95,6 @@ class ControladorLibros {
 
     // mostrar el formulario de edicion
     function showFormEditarLibro($id_libro = null){
-        AuthHelper::checkLoggedIn();
 
         if(empty($id_libro) || !is_numeric($id_libro)){
             $this->vistaLibro->mostrarError("ID de libro no especificado para edición.");
@@ -116,7 +113,6 @@ class ControladorLibros {
 
     // procesar el formulario de edicion
     function editarLibro() {
-        AuthHelper::checkLoggedIn();
         $id_libro= $_POST['id_libro'] ?? null;
         $titulo = $_POST['titulo'] ?? null;
         $genero = $_POST['genero'] ?? null;
@@ -136,7 +132,6 @@ class ControladorLibros {
 
     // 5. Eliminar autor (Baja) - Protegido por AuthHelper
     function eliminarLibro($id_libro = null) {
-        AuthHelper::checkLoggedIn();
         if (empty($id_libro) || !is_numeric($id_libro)) {
             $this->vistaLibro->mostrarError("Debe indicar un ID de libro válido para eliminar.");
             return;

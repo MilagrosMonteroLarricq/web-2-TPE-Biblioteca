@@ -29,7 +29,7 @@ class AdminVista{
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>Nombre</th>
                     <th>Nacionalidad</th>
                     <th>Acciones</th>
@@ -38,7 +38,7 @@ class AdminVista{
             <tbody>
                 <?php foreach ($autores as $autor): ?> 
                 <tr>
-                    <td><?= htmlspecialchars($autor->id_autor) ?></td>
+                    <!--<td><?= htmlspecialchars($autor->id_autor) ?></td>-->
                     <td><?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?></td>
                     <td><?= htmlspecialchars($autor->nacionalidad) ?></td>
                     <td>

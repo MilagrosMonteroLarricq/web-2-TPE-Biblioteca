@@ -4,6 +4,7 @@ include_once 'TPE2/controlador/libros_controlador.php';
 include_once 'TPE2/controlador/seguridad_controlador.php';
 include_once 'TPE2/controlador/home_controlador.php';
 include_once 'TPE2/controlador/controlador_admin.php';
+include_once 'TPE2/middlewares/auth.helper.php';
 
 // leemos la accion que viene por parametro
 $action = 'home'; 
@@ -62,62 +63,70 @@ switch ($params[0]) {
         $controller->logout();
         break;
 
-    case 'listarAutores':
-        $controller = new ControladorAutor();
-        $controller->showAutores(); // Llama al método que lista todas las categorías
-        break;
+    
     
     case 'admin':
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorAdministrador(); 
         $controller->showPanelAdmin();
         break;
         
     case 'agregarAutorForm': // Muestra el formulario de Alta (GET)
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorAutor();
         $controller->showFormAgregarAutor();
         break;
         
     case 'agregarAutor': // Procesa la creación (POST)
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorAutor();
         $controller->agregarAutor();
         break;
         
     case 'editarAutorForm': // Muestra el formulario de Edición (GET /id)
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorAutor();
         $controller->showFormEditarAutor($params[1]);
         break;
         
     case 'editarAutor': // Procesa la edición (POST)
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorAutor();
         $controller->editarAutor();
         break;
         
     case 'eliminarAutor': // Procesa la eliminación (GET /id)
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorAutor();
         $controller->eliminarAutor($params[1]);
         break;
 
     case 'agregarLibroForm':
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller= new ControladorLibros();
         $controller->showFormAgregarLibro();
         break;
 
     case 'agregarLibro':
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorLibros();
         $controller->agregarLibro();
         break;
     
     case 'editarLibroForm':
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller = new ControladorLibros();
         $controller->showFormEditarLibro($params[1]);
         break;
 
     case 'editarLibro':
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller= new ControladorLibros;
         $controller->editarLibro();
         break;
     
     case 'eliminarLibro':
+        AuthHelper::checkAdmin(); // *SEGURIDAD: Solo ADMIN*
         $controller=new ControladorLibros();
         $controller->eliminarLibro($params[1]);
         break;

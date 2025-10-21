@@ -11,44 +11,44 @@
 <?php
     class AutorVista {
         function mostrarListadoAutores($autores) {
-        ?>
-    <!DOCTYPE html>
-    <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Listado de Autores</title>
-        </head>
+            ?>
+            <!DOCTYPE html>
+            <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Listado de Autores</title>
+                </head>
 
-        <body>
-            <h1>Listado de Autores (Categorías)</h1>
-            <p>
-                <a href="route.php?action=listarLibros">Ver todos los libros</a><br>
-                <a href="route.php?action=agregarAutorForm">Agregar Nueva Categoría</a><br>
-            </p>
-                <hr>
-            <?php if (empty($autores)): ?>
-                <p>No hay autores registrados.</p>
-            <?php else: ?>
-                
-                <ul>
-                    <?php foreach ($autores as $autor): ?>
-                        <li>    
-                            <a href="route.php?action=librosPorAutor/<?= $autor->id_autor ?>">
-                                <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?>
-                            </a>
-                                [ <a href="route.php?action=editarAutorForm/<?= $autor->id_autor ?>">Editar</a> ]
-                                [ <a href="route.php?action=eliminarAutor/<?= $autor->id_autor ?>">Eliminar</a> ]
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+                <body>
+                <h1>Listado de Autores (Categorías)</h1>
+                <p>
+                    <a href="route.php?action=listarLibros">Ver todos los libros</a><br>
+                    <a href="route.php?action=agregarAutorForm">Agregar Nueva Categoría</a><br>
+                </p>
+                    <hr>
+                <?php if (empty($autores)): ?>
+                    <p>No hay autores registrados.</p>
+                <?php else: ?>
+                    
+                    <ul>
+                        <?php foreach ($autores as $autor): ?>
+                            <li>    
+                                <a href="route.php?action=librosPorAutor/<?= $autor->id_autor ?>">
+                                    <?= htmlspecialchars($autor->nombre . ' ' . $autor->apellido) ?>
+                                </a>
+                                    [ <a href="route.php?action=editarAutorForm/<?= $autor->id_autor ?>">Editar</a> ]
+                                    [ <a href="route.php?action=eliminarAutor/<?= $autor->id_autor ?>">Eliminar</a> ]
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 <?php endif; ?>
             </body>
             </html>
             <?php
         }
             
-            // Método auxiliar para errores que podría usar el ControladorAutor
+        // Método auxiliar para errores que podría usar el ControladorAutor
         function mostrarError($mensaje) {
             ?>
             <h1>Error de Autor</h1>

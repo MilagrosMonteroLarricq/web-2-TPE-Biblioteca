@@ -44,5 +44,26 @@ class AuthHelper {
             die();
         }
     }
+
+    // Nuevo método estático para proteger rutas: verifica si el usuario es 'admin'
+    public static function checkAdmin() {
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+
+        // 1. Verifica si está logueado
+        if (!isset($_SESSION['IS_LOGGED']) || $_SESSION['IS_LOGGED'] !== true) {
+            header("Location: " . BASE_URL . "login"); 
+            die();
+        }
+        
+        // 2. Verifica si el rol es 'admin'
+        // IMPORTANTE: Asegúrate de que el valor del rol de administrador en tu DB sea 'admin'
+        if (!isset($_SESSION['ROL']) || $_SESSION['ROL'] !== 'admin') {
+            // Si no es admin, redirige al home (ej. 403 Forbidden)
+            header("Location: " . BASE_URL . "home"); 
+            die();
+        }
+    }
 }
 ?>
